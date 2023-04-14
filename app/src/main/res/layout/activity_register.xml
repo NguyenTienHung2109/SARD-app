@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/imageRegister" />
+        app:srcCompat="@drawable/image_register" />
 
     <TextView
         android:id="@+id/appName"
