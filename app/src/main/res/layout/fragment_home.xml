@@ -61,7 +61,7 @@
                 android:contentDescription="@string/applogo"
                 android:padding="4dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/money_lover_logo"
+                android:src="@drawable/image_fragment"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
