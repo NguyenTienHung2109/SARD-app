@@ -12,4 +12,5 @@
     <color name="green_income">#00897B</color>
     <color name="light_bg">#f2f2f2</color>
     <color name="gray">#F2F2F2</color>
+    <color name="bgBottomNavigation">#fe485a</color>
 </resources>
