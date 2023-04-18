@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "479852915298",
+    "project_id": "gamvodich-907b1",
+    "storage_bucket": "gamvodich-907b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:479852915298:android:de8454eab2b619f0be7f3b",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "479852915298-ti6dueekls6pn6adg955m1h13uvr653k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPUnQqQuY0Wa3O4-8lXZ07avKAa5ATeIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "479852915298-ti6dueekls6pn6adg955m1h13uvr653k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:479852915298:android:575db6faaf68ef87be7f3b",
+        "android_client_info": {
+          "package_name": "com.example.prm392_personalexpensetracking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "479852915298-ti6dueekls6pn6adg955m1h13uvr653k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPUnQqQuY0Wa3O4-8lXZ07avKAa5ATeIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "479852915298-ti6dueekls6pn6adg955m1h13uvr653k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

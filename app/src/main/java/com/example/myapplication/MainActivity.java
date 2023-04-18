@@ -22,13 +22,15 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); //bật chế độ toàn màn hình
 
-        setContentView(R.layout.activity_login);
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
-        suggestSignUpBtn = findViewById(R.id.suggestRegisterBtn);
-
-        suggestSignUpBtn.setOnClickListener(view ->
-                startActivity(new Intent(MainActivity.this, RegisterActivity.class))
-        );
+//        setContentView(R.layout.activity_login);
+//
+//        suggestSignUpBtn = findViewById(R.id.suggestRegisterBtn);
+//
+//        suggestSignUpBtn.setOnClickListener(view ->
+//                startActivity(new Intent(MainActivity.this, RegisterActivity.class))
+//        );
 
     }
 }
