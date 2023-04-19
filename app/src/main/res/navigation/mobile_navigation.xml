@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_home">
+    app:startDestination="@+id/navigation_home">
 
     <fragment
         tools:layout="@layout/fragment_home"
@@ -14,13 +14,13 @@
     <fragment
         tools:layout="@layout/fragment_report"
         android:id="@+id/navigation_report"
-        android:name="com.example.myapplication.ui.home.HomeFragment"
+        android:name="com.example.myapplication.ui.report.ReportFragment"
         android:label="Report"/>
 
     <fragment
         tools:layout="@layout/fragment_setting"
-        android:id="@+id/navigation_setting"
-        android:name="com.example.myapplication.ui.home.HomeFragment"
+        android:id="@+id/navigation_settings"
+        android:name="com.example.myapplication.ui.setting.SettingFragment"
         android:label="Setting"/>
 
 </navigation>
