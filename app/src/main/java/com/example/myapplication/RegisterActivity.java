@@ -7,6 +7,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -97,15 +100,31 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(RegisterActivity.this, "Register successfully!",
-                                        Toast.LENGTH_SHORT).show();
+                                LayoutInflater li = getLayoutInflater();
+                                //Getting the View object as defined in the customtoast.xml file
+                                View layout = li.inflate(R.layout.register_done_toast,(ViewGroup) findViewById(R.id.register_done_toast));
+
+                                //Creating the Toast object
+                                Toast toast = new Toast(getApplicationContext());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+//                                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                toast.setView(layout);//setting the view of custom toast layout
+                                toast.show();
                                 Map<String, Object> info = new HashMap<>();
                                 info.put("displayName", name);
                                 info.put("currency", "$");
 
                             } else {
-                                Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
+                                LayoutInflater li = getLayoutInflater();
+                                //Getting the View object as defined in the customtoast.xml file
+                                View layout = li.inflate(R.layout.register_fail_toast,(ViewGroup) findViewById(R.id.register_fail_toast));
+
+                                //Creating the Toast object
+                                Toast toast = new Toast(getApplicationContext());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+//                                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                toast.setView(layout);//setting the view of custom toast layout
+                                toast.show();
                             }
                         }
                     });

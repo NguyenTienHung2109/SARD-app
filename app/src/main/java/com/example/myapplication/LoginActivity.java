@@ -7,6 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -92,15 +96,31 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
 //                                saveProfileInfo();
                                 Log.d(TAG, "signInWithEmail:success");
-                                Toast.makeText(LoginActivity.this, "Login successfully!.",
-                                        Toast.LENGTH_SHORT).show();
+                                LayoutInflater li = getLayoutInflater();
+                                //Getting the View object as defined in the customtoast.xml file
+                                View layout = li.inflate(R.layout.login_done_toast,(ViewGroup) findViewById(R.id.login_done_toast));
+
+                                //Creating the Toast object
+                                Toast toast = new Toast(getApplicationContext());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                toast.setView(layout);//setting the view of custom toast layout
+                                toast.show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                             } else {
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
+                                LayoutInflater li = getLayoutInflater();
+                                //Getting the View object as defined in the customtoast.xml file
+                                View layout = li.inflate(R.layout.login_fail_toast,(ViewGroup) findViewById(R.id.login_fail_toast));
+
+                                //Creating the Toast object
+                                Toast toast = new Toast(getApplicationContext());
+                                toast.setDuration(Toast.LENGTH_SHORT);
+//                                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                toast.setView(layout);//setting the view of custom toast layout
+                                toast.show();
                             }
                         }
                     });
