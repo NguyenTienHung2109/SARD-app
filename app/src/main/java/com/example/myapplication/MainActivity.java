@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     public static String displayName = "";
 
+    public static String currency = "đ";
+
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     FirebaseUser currentUser;
