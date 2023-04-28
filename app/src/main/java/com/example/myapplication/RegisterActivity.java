@@ -110,6 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
 //                                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                                 toast.setView(layout);//setting the view of custom toast layout
                                 toast.show();
+
                                 Map<String, Object> info = new HashMap<>();
                                 info.put("displayName", name);
                                 info.put("currency", "$");

@@ -21,9 +21,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     public static String displayName = "";
+    public static String email = "";
 
     public static String currency = "đ";
 
@@ -78,5 +82,8 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
+    }
+    public static String getMonthTitle(Calendar cur){
+        return new SimpleDateFormat("MMM, yyyy").format(cur.getTime());
     }
 }

@@ -33,7 +33,9 @@ import java.util.Calendar;
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private int totalExpenses = 0, currentBalance = 0, totalIncome = 0;
+    public int totalBalance = 0;
     private TextView expenseStat, balanceStat, incomeStat, monthTitle, balanceHeaderStat;
+
     private ImageView prevMonthBtn, nextMonthBtn, reloadBtn;
     private ExtendedFloatingActionButton addExpenseFab;
     private Calendar currentMonth;
@@ -51,9 +53,22 @@ public class HomeFragment extends Fragment {
         currentMonth = Calendar.getInstance();
 
         monthTitle = binding.monthTitle;
+        monthTitle.setText(MainActivity.getMonthTitle(currentMonth));
 
         prevMonthBtn = binding.prevMonthBtn;
         nextMonthBtn = binding.nextMonthBtn;
+
+        prevMonthBtn.setOnClickListener(view -> {
+            currentMonth.add(Calendar.MONTH, -1);
+            monthTitle.setText(MainActivity.getMonthTitle(currentMonth));
+            loadData(binding);
+        });
+
+        nextMonthBtn.setOnClickListener(view -> {
+            currentMonth.add(Calendar.MONTH, 1);
+            monthTitle.setText(MainActivity.getMonthTitle(currentMonth));
+            loadData(binding);
+        });
 
         addExpenseFab = binding.addExpenseFab;
 
@@ -62,6 +77,24 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        if(fAuth.getCurrentUser() != null)
+            loadData(binding);
+    }
+
+    private void loadData(FragmentHomeBinding binding){
+        Calendar tmpCal = Calendar.getInstance();
+        totalBalance = 0;
+        fStore.collection("Data").document(fAuth.getUid()).collection("Expenses").get().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

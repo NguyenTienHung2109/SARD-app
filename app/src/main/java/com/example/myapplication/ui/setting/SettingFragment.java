@@ -56,6 +56,7 @@ public class SettingFragment extends Fragment {
             saveProfileInfo();
 
         textViewUsername.setText(MainActivity.displayName);
+        textViewEmail.setText(MainActivity.email);
 
         currencyBtn = binding.chooseCurrencyBtn;
         languageBtn = binding.languageBtn;
@@ -65,6 +66,7 @@ public class SettingFragment extends Fragment {
 
         logOutBtn.setOnClickListener(view -> {
             MainActivity.displayName = "";
+            MainActivity.email = "";
 
             fAuth.signOut();
             Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -93,6 +95,7 @@ public class SettingFragment extends Fragment {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             MainActivity.displayName = document.getString("displayName");
+                            MainActivity.email = firebaseUser.getEmail();
                         } else {
                             Log.d("userInfo", "No such document");
                         }
