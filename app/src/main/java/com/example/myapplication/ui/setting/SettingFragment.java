@@ -95,6 +95,7 @@ public class SettingFragment extends Fragment {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             MainActivity.displayName = document.getString("displayName");
+                            MainActivity.currency = document.getString("currency");
                             MainActivity.email = firebaseUser.getEmail();
                         } else {
                             Log.d("userInfo", "No such document");

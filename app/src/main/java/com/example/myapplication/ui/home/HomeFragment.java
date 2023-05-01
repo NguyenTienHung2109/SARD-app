@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.ExpenseActivity;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.databinding.FragmentHomeBinding;
 
@@ -43,6 +44,17 @@ public class HomeFragment extends Fragment {
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
 
+    private void setStats(FragmentHomeBinding binding){
+        totalExpenses = 0;
+        totalIncome = 0;
+
+        balanceHeaderStat = binding.balanceHeaderStat;
+
+        currentBalance = totalIncome - totalExpenses;
+
+        balanceHeaderStat.setText( MainActivity.intToMoneyFormat(totalBalance));
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -71,6 +83,10 @@ public class HomeFragment extends Fragment {
         });
 
         addExpenseFab = binding.addExpenseFab;
+        addExpenseFab.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), ExpenseActivity.class);
+            startActivity(intent);
+        });
 
         reloadBtn = binding.reloadBtn;
 
@@ -88,7 +104,15 @@ public class HomeFragment extends Fragment {
     private void loadData(FragmentHomeBinding binding){
         Calendar tmpCal = Calendar.getInstance();
         totalBalance = 0;
-        fStore.collection("Data").document(fAuth.getUid()).collection("Expenses").get().addOnFailureListener(new OnFailureListener() {
+        fStore.collection("Data").document(fAuth.getUid()).collection("Expenses").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for(DocumentSnapshot ds:task.getResult()){
+                    tmpCal.setTime(ds.getDate("createAt"));
+                };
+                setStats(binding);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();

@@ -28,13 +28,19 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     public static String displayName = "";
     public static String email = "";
-
     public static String currency = "đ";
 
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     FirebaseUser currentUser;
     TextView suggestSignUpBtn;
+
+    public static String intToMoneyFormat(int amount){
+        if(currency == "đ")
+            return (String.format("%,d", amount) + " " + currency);
+        else
+            return (currency + " " + String.format("%,d", amount));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
