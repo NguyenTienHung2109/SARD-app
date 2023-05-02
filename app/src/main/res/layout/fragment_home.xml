@@ -30,12 +30,13 @@
             android:textSize="20dp" />
 
         <TextView
+            android:id="@+id/balanceHeaderStat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="70dp"
             android:text="@string/money_placeholder"
-            android:textSize="20dp" />
+            android:textSize="25dp" />
 
         <ImageView
             android:id="@+id/incomeIcon"
