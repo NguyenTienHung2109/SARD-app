@@ -74,42 +74,6 @@
             android:textColor="@color/black"
             android:textSize="16sp" />
 
-        <!--        <com.google.android.material.chip.ChipGroup-->
-        <!--            android:id="@+id/chipContainer"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="12dp"-->
-        <!--            app:checkedChip="@+id/chipToday"-->
-        <!--            app:singleSelection="true">-->
-
-        <!--            <com.google.android.material.chip.Chip-->
-        <!--                android:id="@+id/chipToday"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:checkable="true"-->
-        <!--                android:clickable="true"-->
-        <!--                android:focusable="true"-->
-        <!--                android:text="@string/add_expense_today_chip" />-->
-
-        <!--            <com.google.android.material.chip.Chip-->
-        <!--                android:id="@+id/chipYesterday"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:checkable="true"-->
-        <!--                android:clickable="true"-->
-        <!--                android:focusable="true"-->
-        <!--                android:text="@string/add_expense_yesterday_chip" />-->
-
-        <!--            <com.google.android.material.chip.Chip-->
-        <!--                android:id="@+id/chipCustom"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:checkable="true"-->
-        <!--                android:clickable="true"-->
-        <!--                android:focusable="true"-->
-        <!--                android:text="@string/add_expense_custom_chip" />-->
-        <!--        </com.google.android.material.chip.ChipGroup>-->
-
         <Button
             android:id="@+id/saveExpenseBtn"
             style="@style/Widget.MaterialComponents.Button"
