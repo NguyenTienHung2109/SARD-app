@@ -76,7 +76,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+        finish();
+    }
 
     private void signIn(){
         String email = emailInput.getText().toString();

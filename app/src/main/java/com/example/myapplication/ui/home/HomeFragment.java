@@ -89,9 +89,6 @@ public class HomeFragment extends Fragment {
             Intent intent = new Intent(getActivity(), ExpenseActivity.class);
             startActivity(intent);
         });
-
-        //reloadBtn = binding.reloadBtn;
-
         return root;
     }
 
