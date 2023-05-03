@@ -48,10 +48,12 @@ public class HomeFragment extends Fragment {
         totalExpenses = 0;
         totalIncome = 0;
 
+        expenseStat = binding.expenseStat;
         balanceHeaderStat = binding.balanceHeaderStat;
 
         currentBalance = totalIncome - totalExpenses;
 
+        expenseStat.setText( MainActivity.intToMoneyFormat(totalExpenses));
         balanceHeaderStat.setText( MainActivity.intToMoneyFormat(totalBalance));
     }
 
@@ -88,7 +90,7 @@ public class HomeFragment extends Fragment {
             startActivity(intent);
         });
 
-        reloadBtn = binding.reloadBtn;
+        //reloadBtn = binding.reloadBtn;
 
         return root;
     }

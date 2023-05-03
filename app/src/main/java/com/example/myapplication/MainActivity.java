@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); //bật chế độ toàn màn hình
 
-        //startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
         setContentView(R.layout.activity_login);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
