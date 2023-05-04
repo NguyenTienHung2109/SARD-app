@@ -18,6 +18,8 @@ import com.example.myapplication.ExpenseActivity;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.databinding.FragmentHomeBinding;
 
+import com.example.myapplication.model.Category;
+import com.example.myapplication.model.Expense;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -39,6 +41,7 @@ public class HomeFragment extends Fragment {
 
     private ImageView prevMonthBtn, nextMonthBtn, reloadBtn;
     private ExtendedFloatingActionButton addExpenseFab;
+    private ArrayList<Expense> expenseArrayList = new ArrayList<>();
     private Calendar currentMonth;
 
     FirebaseFirestore fStore;
@@ -49,11 +52,21 @@ public class HomeFragment extends Fragment {
         totalIncome = 0;
 
         expenseStat = binding.expenseStat;
+        incomeStat = binding.incomeStat;
         balanceHeaderStat = binding.balanceHeaderStat;
+
+        expenseArrayList.forEach((item) -> {
+            int catType = Category.getCategoryById(item.getCateId()).getType();
+            if(catType == 1)
+                totalExpenses += item.getAmount();
+            if(catType == 2)
+                totalIncome += item.getAmount();
+        });
 
         currentBalance = totalIncome - totalExpenses;
 
         expenseStat.setText( MainActivity.intToMoneyFormat(totalExpenses));
+        incomeStat.setText( MainActivity.intToMoneyFormat(totalIncome));
         balanceHeaderStat.setText( MainActivity.intToMoneyFormat(totalBalance));
     }
 
@@ -106,9 +119,22 @@ public class HomeFragment extends Fragment {
         fStore.collection("Data").document(fAuth.getUid()).collection("Expenses").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                expenseArrayList.clear();
                 for(DocumentSnapshot ds:task.getResult()){
+                    totalBalance += Math.toIntExact(ds.getLong("amount")) * (Category.getCategoryById(Math.toIntExact(ds.getLong("cateId"))).getType() == 1 ? -1 : 1);
                     tmpCal.setTime(ds.getDate("createAt"));
+                    if (tmpCal.get(Calendar.YEAR) == currentMonth.get(Calendar.YEAR) && tmpCal.get(Calendar.MONTH) == currentMonth.get(Calendar.MONTH)){
+                        Expense expense = new Expense(
+                                ds.getString("expenseId"),
+                                Math.toIntExact(ds.getLong("cateId")),
+                                ds.getString("description"),
+                                Math.toIntExact(ds.getLong("amount")),
+                                ds.getDate("createAt")
+                        );
+                        expenseArrayList.add(expense);
+                    }
                 };
+                expenseArrayList.sort((Expense ex1, Expense ex2) -> ex2.getCreateAt().compareTo(ex1.getCreateAt()));
                 setStats(binding);
             }
         }).addOnFailureListener(new OnFailureListener() {

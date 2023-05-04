@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.example.myapplication.databinding.ActivityMainBinding;
 
+import com.example.myapplication.model.Category;
+import com.example.myapplication.model.ExpenseType;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -73,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
 
+        ExpenseType.initExpenseType();
+        Category.initCategory();
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_report, R.id.navigation_settings)

@@ -14,8 +14,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.adapter.CategoryAdapter;
+import com.example.myapplication.adapter.ExpenseTypeAdapter;
 import com.example.myapplication.model.Expense;
 import com.example.myapplication.model.Category;
+import com.example.myapplication.model.ExpenseType;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -88,19 +91,19 @@ public class ExpenseActivity extends AppCompatActivity {
 
     private void spinnerSetup(int catType, Category cat){
         expenseTypeSpinner = findViewById(R.id.expenseTypeSpinner);
-        //ExpenseTypeAdapter expenseTypeAdapter = new ExpenseTypeAdapter(this, R.layout.expense_type_spinner_adapter, ExpenseType.getExpenseTypeList());
-        //expenseTypeSpinner.setAdapter(expenseTypeAdapter);
+        ExpenseTypeAdapter expenseTypeAdapter = new ExpenseTypeAdapter(this, R.layout.expense_type_spinner_adapter, ExpenseType.getExpenseTypeList());
+        expenseTypeSpinner.setAdapter(expenseTypeAdapter);
         expenseTypeSpinner.setSelection(catType - 1);
 
         ArrayList<Category> catList = Category.getCategoryList(catType);
         categorySpinner = findViewById(R.id.categorySpinner);
-        //CategoryAdapter categoryAdapter = new CategoryAdapter(this, R.layout.category_spinner_adapter, catList);
-        //categorySpinner.setAdapter(categoryAdapter);
+        CategoryAdapter categoryAdapter = new CategoryAdapter(this, R.layout.category_spinner_adapter, catList);
+        categorySpinner.setAdapter(categoryAdapter);
         categorySpinner.setSelection(catList.indexOf(cat));
         expenseTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //categorySpinner.setAdapter(new CategoryAdapter(ExpenseActivity.this, R.layout.category_spinner_adapter, Category.getCategoryList(i+1)));
+                categorySpinner.setAdapter(new CategoryAdapter(ExpenseActivity.this, R.layout.category_spinner_adapter, Category.getCategoryList(i+1)));
                 categorySpinner.setSelection(catList.indexOf(cat));
             }
 
@@ -152,6 +155,35 @@ public class ExpenseActivity extends AppCompatActivity {
     }
 
     private void saveExpenseHandled(){
+        ExpenseType currentExpenseType = ExpenseType.getExpenseTypeList().get(expenseTypeSpinner.getSelectedItemPosition());
+        Category currentCategory = Category.getCategoryList(currentExpenseType.getExpenseTypeId()).get(categorySpinner.getSelectedItemPosition());
+
+        if(amount.getText().length() == 0){
+            showErrorAmountRequiredAlert();
+            return;
+        }
+        Calendar c = Calendar.getInstance();
+        c.set(year, month, day);
+
+        String id = bundle == null ? UUID.randomUUID().toString() : currentExpense.getExpenseId();
+        Map<String, Object> transaction = new HashMap<>();
+        transaction.put("expenseId", id);
+        transaction.put("cateId", currentCategory.getCateId());
+        transaction.put("description", description.getText().toString());
+        transaction.put("amount", Integer.parseInt(amount.getText().toString()));
+        transaction.put("createAt", c.getTime());
+
+        if(bundle == null){
+            fStore.collection("Data").document(fAuth.getUid()).collection("Expenses").document(id).set(transaction).addOnSuccessListener(unused -> {
+                Toast.makeText(ExpenseActivity.this, "Added", Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(e -> Toast.makeText(ExpenseActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show());
+        }
+        else{
+            fStore.collection("Data").document(fAuth.getUid()).collection("Expenses").document(id).update(transaction).addOnSuccessListener(unused -> {
+                Toast.makeText(ExpenseActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+            }).addOnFailureListener(e -> Toast.makeText(ExpenseActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show());
+        }
+
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
@@ -168,6 +200,12 @@ public class ExpenseActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    private String dateToString(int day, int month, int year){
+        LocalDate date = null;
+        date = LocalDate.of(year, month, day);
+        return  date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
     private void showDatePickerDialog(int day, int month, int year){
         DatePickerDialog dialog = new DatePickerDialog(this, (datePicker, i, i1, i2) -> {
             dateButton.setText(dateToString(i2, i1+1, i));
@@ -177,12 +215,6 @@ public class ExpenseActivity extends AppCompatActivity {
         }, year, month, day);
 
         dialog.show();
-    }
-
-    private String dateToString(int day, int month, int year){
-        LocalDate date = null;
-        date = LocalDate.of(year, month, day);
-        return  date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     @Override
@@ -198,8 +230,8 @@ public class ExpenseActivity extends AppCompatActivity {
     }
 
     private void clear(){
-//        amount.setText("");
-//        description.setText("");
+        amount.setText("");
+        description.setText("");
         cal = Calendar.getInstance();
     }
 }
