@@ -33,7 +33,6 @@ public class ExpenseType {
 
         expenseTypeList.add(new ExpenseType(1, "Outcome"));
         expenseTypeList.add(new ExpenseType(2, "Income"));
-//        expenseTypeList.add(new ExpenseType(3, "Loan / Debt"));
     }
 
     public static ArrayList<ExpenseType> getExpenseTypeList(){
