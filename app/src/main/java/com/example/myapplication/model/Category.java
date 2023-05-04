@@ -16,7 +16,9 @@ public class Category {
         3. Loan / Debt
      */
 
-    public Category() {}
+    public Category() {
+        initCategory();
+    }
 
     public Category(String cateName) {
         this.cateName = cateName;
