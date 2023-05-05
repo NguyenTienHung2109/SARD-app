@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.ExpenseActivity;
 import com.example.myapplication.MainActivity;
+import com.example.myapplication.adapter.ExpensesDayAdapter;
 import com.example.myapplication.databinding.FragmentHomeBinding;
 
 import com.example.myapplication.model.Category;
@@ -35,6 +36,8 @@ import java.util.Calendar;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
+    private RecyclerView mRecyclerView;
+    private ExpensesDayAdapter mExpenseAdapter ;
     private int totalExpenses = 0, currentBalance = 0, totalIncome = 0;
     public int totalBalance = 0;
     private TextView expenseStat, balanceStat, incomeStat, monthTitle, balanceHeaderStat;
@@ -70,6 +73,12 @@ public class HomeFragment extends Fragment {
         balanceHeaderStat.setText( MainActivity.intToMoneyFormat(totalBalance));
     }
 
+    private void bindingRecyclerView(FragmentHomeBinding binding){
+        mRecyclerView = binding.expensesRecyclerView;
+        mExpenseAdapter = new ExpensesDayAdapter(expenseArrayList, getContext());
+        mRecyclerView.setAdapter(mExpenseAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
