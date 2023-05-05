@@ -67,6 +67,7 @@ public class SettingFragment extends Fragment {
         logOutBtn.setOnClickListener(view -> {
             MainActivity.displayName = "";
             MainActivity.email = "";
+            MainActivity.currency = "$";
 
             fAuth.signOut();
             Intent intent = new Intent(getActivity(), LoginActivity.class);

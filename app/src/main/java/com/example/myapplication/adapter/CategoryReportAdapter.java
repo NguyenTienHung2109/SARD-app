@@ -60,14 +60,6 @@ public class CategoryReportAdapter extends RecyclerView.Adapter<CategoryReportAd
         else if(category.getType() == 1) {
                 holder.price.setTextColor(ContextCompat.getColor(context, R.color.red_expense));
             }
-
-//        holder.dashboardExpenseItem.setOnClickListener(view -> {
-//            Intent intent = new Intent(context, ExpenseActivity.class);
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable("selected_expense", categoryReport);
-//            intent.putExtras(bundle);
-//            context.startActivity(intent);
-//        });
     }
 
     @Override

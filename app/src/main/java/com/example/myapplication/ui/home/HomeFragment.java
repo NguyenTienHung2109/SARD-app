@@ -85,6 +85,7 @@ public class HomeFragment extends Fragment {
 
         fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
+        expenseArrayList = new ArrayList<>();
 
         currentMonth = Calendar.getInstance();
 
@@ -145,6 +146,7 @@ public class HomeFragment extends Fragment {
                 };
                 expenseArrayList.sort((Expense ex1, Expense ex2) -> ex2.getCreateAt().compareTo(ex1.getCreateAt()));
                 setStats(binding);
+                bindingRecyclerView(binding);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

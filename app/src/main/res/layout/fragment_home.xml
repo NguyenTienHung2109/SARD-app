@@ -170,7 +170,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_margin="20dp"
+        android:layout_margin="0dp"
         android:fillViewport="true"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="350dp"
@@ -183,6 +183,7 @@
             android:paddingBottom="128dp" />
 
     </androidx.core.widget.NestedScrollView>
+
 
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

@@ -37,7 +37,6 @@ public class ExpenseActivity extends AppCompatActivity {
     Button dateButton, saveBtn, deleteBtn;
     Calendar cal = Calendar.getInstance();
     int day, month, year;
-
     Spinner expenseTypeSpinner, categorySpinner;
     TextInputEditText amount, description;
     FirebaseFirestore fStore;
