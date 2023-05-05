@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         Category.initCategory();
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_report, R.id.navigation_settings)
+                R.id.navigation_home, R.id.navigation_overview, R.id.navigation_settings)
                 .build();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);

@@ -13,7 +13,7 @@
 
     <fragment
         tools:layout="@layout/fragment_report"
-        android:id="@+id/navigation_report"
+        android:id="@+id/navigation_overview"
         android:name="com.example.myapplication.ui.report.ReportFragment"
         android:label="Report"/>
 
