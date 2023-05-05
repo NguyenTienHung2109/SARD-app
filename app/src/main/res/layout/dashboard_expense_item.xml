@@ -9,7 +9,7 @@
     android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
-        android:background="@color/gray"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
@@ -18,7 +18,7 @@
         app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="@color/gray"
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingVertical="12dp">
