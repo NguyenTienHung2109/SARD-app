@@ -1,5 +1,7 @@
 package com.example.myapplication.ui.setting;
 
+import static com.example.myapplication.MainActivity.currency;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -67,7 +69,7 @@ public class SettingFragment extends Fragment {
         logOutBtn.setOnClickListener(view -> {
             MainActivity.displayName = "";
             MainActivity.email = "";
-            MainActivity.currency = "$";
+            currency = "$";
 
             fAuth.signOut();
             Intent intent = new Intent(getActivity(), LoginActivity.class);
@@ -96,7 +98,7 @@ public class SettingFragment extends Fragment {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             MainActivity.displayName = document.getString("displayName");
-                            MainActivity.currency = document.getString("currency");
+                            currency = document.getString("currency");
                             MainActivity.email = firebaseUser.getEmail();
                         } else {
                             Log.d("userInfo", "No such document");
@@ -120,39 +122,38 @@ public class SettingFragment extends Fragment {
         final RadioButton unitBtn = dialog.findViewById(R.id.unitBtn);
         Button submitButton = dialog.findViewById(R.id.saveBtn);
 
-        if(Objects.equals(MainActivity.currency, "$")) usdBtn.setChecked(true);
-        if(Objects.equals(MainActivity.currency, "đ")) vndBtn.setChecked(true);
-        if(Objects.equals(MainActivity.currency, "N/A")) unitBtn.setChecked(true);
+        if(Objects.equals(currency, "$")) usdBtn.setChecked(true);
+        if(Objects.equals(currency, "đ")) vndBtn.setChecked(true);
+        if(Objects.equals(currency, "N/A")) unitBtn.setChecked(true);
 
         usdBtn.setOnClickListener(view -> {
-            MainActivity.currency = "$";
+            currency = "$";
             usdBtn.setChecked(true);
             vndBtn.setChecked(false);
             unitBtn.setChecked(false);
         });
         vndBtn.setOnClickListener(view -> {
-            MainActivity.currency = "đ";
+            currency = "đ";
             usdBtn.setChecked(false);
             vndBtn.setChecked(true);
             unitBtn.setChecked(false);
         });
         unitBtn.setOnClickListener(view -> {
-            MainActivity.currency = "N/A";
+            currency = "N/A";
             usdBtn.setChecked(false);
             vndBtn.setChecked(false);
             unitBtn.setChecked(true);
         });
 
-        submitButton.setOnClickListener(view -> dialog.dismiss());
+        submitButton.setOnClickListener(view -> setCurrency(currency));
 
         dialog.show();
     }
 
-//    private void setCurrency(String currency){
-//        fStore.collection("Data").document(fAuth.getUid()).update("currency", currency).addOnSuccessListener(view -> {
-//            Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
-//            dialog.dismiss();
-//        }).addOnFailureListener(e -> Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show());
-//
-//    }
+    private void setCurrency(String currency){
+        fStore.collection("Data").document(fAuth.getUid()).update("currency", currency).addOnSuccessListener(view -> {
+            dialog.dismiss();
+        }).addOnFailureListener(e -> Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show());
+
+    }
 }
