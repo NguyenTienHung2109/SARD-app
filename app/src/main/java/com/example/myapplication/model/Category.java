@@ -107,17 +107,16 @@ public class Category {
                 return R.drawable.transportation;
             case 104:
                 return R.drawable.laundry;
-            case 105:
             case 219:
                 return R.drawable.money;
-            case 206:
-                return R.drawable.institute;
             case 107:
                 return R.drawable.cafe;
             case 108:
                 return R.drawable.donate;
             case 109:
                 return R.drawable.education;
+            case 206:
+                return R.drawable.institute;
             case 110:
                 return R.drawable.electronics;
             case 111:

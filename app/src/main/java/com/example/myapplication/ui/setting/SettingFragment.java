@@ -145,7 +145,7 @@ public class SettingFragment extends Fragment {
             unitBtn.setChecked(true);
         });
 
-        submitButton.setOnClickListener(view -> setCurrency(currency));
+        submitButton.setOnClickListener(view -> dialog.dismiss());
 
         dialog.show();
     }
