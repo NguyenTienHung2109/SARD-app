@@ -69,10 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
         int fragmentId = getIntent().getIntExtra("FRAGMENT_ID", 0);
 
-        if (fragmentId == 2 && savedInstanceState == null){
-
-        }
-
         setContentView(binding.getRoot());
 
         ExpenseType.initExpenseType();

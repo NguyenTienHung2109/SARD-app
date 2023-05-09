@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "395950371477",
-    "project_id": "gengvodich-5b7bd",
-    "storage_bucket": "gengvodich-5b7bd.appspot.com"
+    "project_number": "744802358813",
+    "project_id": "saving-for-a-rainy-day",
+    "storage_bucket": "saving-for-a-rainy-day.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:395950371477:android:870ba1d55fbe71aa2ce19c",
+        "mobilesdk_app_id": "1:744802358813:android:4e4e1ed0d8e7641a5898f4",
         "android_client_info": {
           "package_name": "com.example.myapplication"
         }
       },
       "oauth_client": [
         {
-          "client_id": "395950371477-vvc41a12vd9f2vg3riacvgqvvpp1akb4.apps.googleusercontent.com",
+          "client_id": "744802358813-jnan88h1pvp0fs5b1vgfjcp2ecd7ta9d.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBaDF189vAJ2v19KkTxHxfitB8tJTM78ck"
+          "current_key": "AIzaSyCYNWnAFiG73_5G9mv8riAVk1PL2Vid6kM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "395950371477-vvc41a12vd9f2vg3riacvgqvvpp1akb4.apps.googleusercontent.com",
+              "client_id": "744802358813-jnan88h1pvp0fs5b1vgfjcp2ecd7ta9d.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
