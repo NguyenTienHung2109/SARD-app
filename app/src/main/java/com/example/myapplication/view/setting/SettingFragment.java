@@ -63,8 +63,11 @@ public class SettingFragment extends Fragment {
         currencyBtn = binding.chooseCurrencyBtn;
         languageBtn = binding.languageBtn;
         logOutBtn = binding.signOutBtn;
+        faqBtn = binding.faqBtn;
 
         currencyBtn.setOnClickListener(view ->chooseCurrencyDialog());
+        languageBtn.setOnClickListener(view -> showLanguageDialog());
+        faqBtn.setOnClickListener(view -> showFaqDialog());
 
         logOutBtn.setOnClickListener(view -> {
             MainActivity.displayName = "";
@@ -76,6 +79,7 @@ public class SettingFragment extends Fragment {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         });
+
         return root;
     }
 
@@ -145,6 +149,44 @@ public class SettingFragment extends Fragment {
             unitBtn.setChecked(true);
         });
 
+        submitButton.setOnClickListener(view -> {
+            fStore.collection("Data").document(fAuth.getUid()).update("currency", currency)
+                    .addOnSuccessListener(aVoid -> dialog.dismiss())
+                    .addOnFailureListener(e -> Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show());
+                }
+        );
+
+        dialog.show();
+    }
+
+    void showFaqDialog() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.faq_dialog);
+
+        TextView faqHeader = dialog.findViewById(R.id.forgotPasswordHeader);
+        TextView faqContent = dialog.findViewById(R.id.faqContent);
+
+        faqHeader.setText("FAQs");
+//        faqContent.setText("No one has any questions yet!");
+
+        Button submitButton = dialog.findViewById(R.id.saveBtn);
+        submitButton.setOnClickListener(view -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+    void showLanguageDialog() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.language_dialog);
+
+        final RadioButton engBtn = dialog.findViewById(R.id.engBtn);
+        engBtn.setChecked(true);
+
+        Button submitButton = dialog.findViewById(R.id.saveBtn);
         submitButton.setOnClickListener(view -> dialog.dismiss());
 
         dialog.show();
