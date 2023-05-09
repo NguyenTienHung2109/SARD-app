@@ -114,6 +114,16 @@ public class RegisterActivity extends AppCompatActivity {
                                 Map<String, Object> info = new HashMap<>();
                                 info.put("displayName", name);
                                 info.put("currency", "$");
+
+                                String uid = fAuth.getUid();
+                                fStore.collection("Data").document(uid).set(info).addOnSuccessListener(unused2 -> {
+//                                sendEmailVerification();
+
+                                    Toast.makeText(RegisterActivity.this, "Register successfully!",
+                                            Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                });
+
                                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
