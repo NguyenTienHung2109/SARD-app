@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.setting;
+package com.example.myapplication.view.setting;
 
 import static com.example.myapplication.MainActivity.currency;
 

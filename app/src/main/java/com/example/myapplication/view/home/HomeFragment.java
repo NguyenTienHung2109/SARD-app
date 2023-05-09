@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.home;
+package com.example.myapplication.view.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.ExpenseActivity;
 import com.example.myapplication.MainActivity;
-import com.example.myapplication.adapter.ExpensesDayAdapter;
+import com.example.myapplication.controller.ExpensesDayAdapter;
 import com.example.myapplication.databinding.FragmentHomeBinding;
 
 import com.example.myapplication.model.Category;
@@ -30,7 +30,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 

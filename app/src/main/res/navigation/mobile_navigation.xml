@@ -8,19 +8,19 @@
     <fragment
         tools:layout="@layout/fragment_home"
         android:id="@+id/navigation_home"
-        android:name="com.example.myapplication.ui.home.HomeFragment"
+        android:name="com.example.myapplication.view.home.HomeFragment"
         android:label="Home"/>
 
     <fragment
         tools:layout="@layout/fragment_report"
         android:id="@+id/navigation_overview"
-        android:name="com.example.myapplication.ui.report.ReportFragment"
+        android:name="com.example.myapplication.view.report.ReportFragment"
         android:label="Report"/>
 
     <fragment
         tools:layout="@layout/fragment_setting"
         android:id="@+id/navigation_settings"
-        android:name="com.example.myapplication.ui.setting.SettingFragment"
+        android:name="com.example.myapplication.view.setting.SettingFragment"
         android:label="Setting"/>
 
 </navigation>

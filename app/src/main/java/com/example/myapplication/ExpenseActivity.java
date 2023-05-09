@@ -14,8 +14,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.adapter.CategoryAdapter;
-import com.example.myapplication.adapter.ExpenseTypeAdapter;
+import com.example.myapplication.controller.CategoryAdapter;
+import com.example.myapplication.controller.ExpenseTypeAdapter;
 import com.example.myapplication.model.Expense;
 import com.example.myapplication.model.Category;
 import com.example.myapplication.model.ExpenseType;
