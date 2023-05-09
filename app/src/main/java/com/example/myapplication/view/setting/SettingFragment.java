@@ -150,9 +150,10 @@ public class SettingFragment extends Fragment {
         });
 
         submitButton.setOnClickListener(view -> {
-            fStore.collection("Data").document(fAuth.getUid()).update("currency", currency)
-                    .addOnSuccessListener(aVoid -> dialog.dismiss())
-                    .addOnFailureListener(e -> Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show());
+            fStore.collection("Data").document(fAuth.getUid()).update("currency", currency).addOnSuccessListener(e -> {
+
+            }).addOnFailureListener(e -> Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show());
+            dialog.dismiss();
                 }
         );
 
