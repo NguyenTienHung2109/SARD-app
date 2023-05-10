@@ -30,6 +30,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static String intToMoneyFormat(int amount){
-        if(currency == "đ")
+        if(Objects.equals(currency, "đ"))
             return (String.format("%,d", amount) + " " + currency);
         else
             return (currency + " " + String.format("%,d", amount));
@@ -86,8 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
-        if(MainActivity.currency.length() == 0)
-            updateProfileInfo();
+        updateProfileInfo();
         AndroidThreeTen.init(this);
 
 //        Firebase
