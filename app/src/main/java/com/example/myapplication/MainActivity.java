@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -10,6 +11,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -18,8 +20,11 @@ import com.example.myapplication.databinding.ActivityMainBinding;
 
 import com.example.myapplication.model.Category;
 import com.example.myapplication.model.ExpenseType;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
@@ -30,12 +35,36 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     public static String displayName = "";
     public static String email = "";
-    public static String currency = "đ";
+    public static String currency = "";
 
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     FirebaseUser currentUser;
     TextView suggestSignUpBtn;
+
+    public static void updateProfileInfo(){
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+
+        if(firebaseUser != null){
+            String userId = firebaseUser.getUid();
+            firebaseFirestore.collection("Data").document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            currency = document.getString("currency");
+                        } else {
+                            Log.d("userInfo", "No such document");
+                        }
+                    } else {
+                        Log.d("userInfo", "get failed with ", task.getException());
+                    }
+                }
+            });
+        }
+    }
 
     public static String intToMoneyFormat(int amount){
         if(currency == "đ")
@@ -56,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+
+        if(MainActivity.currency.length() == 0)
+            updateProfileInfo();
         AndroidThreeTen.init(this);
 
 //        Firebase
