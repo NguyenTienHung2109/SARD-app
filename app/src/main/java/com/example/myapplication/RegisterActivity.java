@@ -113,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 Map<String, Object> info = new HashMap<>();
                                 info.put("displayName", name);
-                                info.put("currency", "$");
+                                info.put("currency", "đ");
 
                                 String uid = fAuth.getUid();
                                 fStore.collection("Data").document(uid).set(info).addOnSuccessListener(unused2 -> {
